@@ -24,12 +24,10 @@ android {
         val properties = Properties()
         properties.load(localProperties.inputStream())
 
-        val apiKey = properties.getProperty("API_KEY")
-
         buildConfigField(
             type = "String",
             name = "API_KEY",
-            value = apiKey
+            value = "\"0f7651b3c5a94dfba1770c94abcfd268\""
         )
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

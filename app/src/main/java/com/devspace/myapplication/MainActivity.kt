@@ -3,16 +3,20 @@ package com.devspace.myapplication
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import com.devspace.myapplication.list.data.ListService
+import com.devspace.myapplication.list.presentation.RecipeListViewModel
+import com.devspace.myapplication.list.presentation.ui.RecipeListScreen
 import com.devspace.myapplication.ui.theme.EasyRecipesTheme
 
 class MainActivity : ComponentActivity() {
+
+    private val listViewModel by viewModels<RecipeListViewModel> { RecipeListViewModel.Factory }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -22,25 +26,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+
+                    EasyRecipesApp(listViewModel)
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    EasyRecipesTheme {
-        Greeting("Android")
     }
 }
