@@ -16,7 +16,7 @@ fun EasyRecipesApp(listViewModel: RecipeListViewModel, detailViewModel: RecipeDe
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "recipeList") {
         composable(route = "recipeList"){
-            RecipeListScreen(listViewModel)
+            RecipeListScreen(listViewModel, navController)
         }
         composable(
             route = "recipeDetail"+ "/{itemId}",
@@ -25,7 +25,7 @@ fun EasyRecipesApp(listViewModel: RecipeListViewModel, detailViewModel: RecipeDe
             })
         ){backStackEntry ->
             val recipeId = requireNotNull(backStackEntry.arguments?.getString("itemId"))
-            RecipeDetailScreen(recipeId, navController, detailViewModel)
+            RecipeDetailScreen(detailViewModel, navController, recipeId)
         }
     }
 }

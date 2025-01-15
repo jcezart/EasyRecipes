@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import com.devspace.myapplication.detail.presentation.RecipeDetailViewModel
 import com.devspace.myapplication.list.data.ListService
 import com.devspace.myapplication.list.presentation.RecipeListViewModel
 import com.devspace.myapplication.list.presentation.ui.RecipeListScreen
@@ -16,6 +17,7 @@ import com.devspace.myapplication.ui.theme.EasyRecipesTheme
 class MainActivity : ComponentActivity() {
 
     private val listViewModel by viewModels<RecipeListViewModel> { RecipeListViewModel.Factory }
+    private val detailViewModel by viewModels<RecipeDetailViewModel> { RecipeDetailViewModel.Factory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +29,9 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
 
-                    EasyRecipesApp(listViewModel)
+                    EasyRecipesApp(
+                        listViewModel = listViewModel,
+                        detailViewModel = detailViewModel)
                 }
             }
         }

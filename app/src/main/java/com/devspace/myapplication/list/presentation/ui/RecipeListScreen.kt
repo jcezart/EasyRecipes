@@ -2,6 +2,7 @@ package com.devspace.myapplication.list.presentation.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -31,22 +32,27 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.devspace.myapplication.common.model.RecipeDto
 import com.devspace.myapplication.list.presentation.RecipeListViewModel
 
 @Composable
-fun RecipeListScreen(viewModel: RecipeListViewModel){
+fun RecipeListScreen(viewModel: RecipeListViewModel,
+                     navController: NavHostController){
 
     val randomRecipesList by viewModel.uiRecipes.collectAsState()
     RandomRecipesListContent(
         randomRecipesList = randomRecipesList
-    )
+    ){ itemClicked ->
+        navController.navigate(route = "recipeDetail/${itemClicked.id}")
+    }
 }
 
 @Composable
 private fun RandomRecipesListContent(
-    randomRecipesList: List<RecipeDto>
+    randomRecipesList: List<RecipeDto>,
+    onItemClicked: (RecipeDto) -> Unit
 
 ) {
     Column(
@@ -86,7 +92,8 @@ private fun RandomRecipesListContent(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color.White),
+                    .background(Color.White)
+                    .clickable {onItemClicked(recipe)},
                 contentAlignment = Alignment.Center
             ){
                 AsyncImage(
