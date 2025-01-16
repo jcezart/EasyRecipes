@@ -5,6 +5,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -28,6 +30,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.text.HtmlCompat
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.devspace.myapplication.common.model.RecipeDto
@@ -39,6 +42,7 @@ fun RecipeDetailScreen(
     navHostController: NavHostController,
     recipeId: String,
 ){
+
     val recipeDto by detailViewModel.uiDetail.collectAsState()
     detailViewModel.fetchRecipeDetail(recipeId)
 
@@ -48,7 +52,9 @@ fun RecipeDetailScreen(
             modifier = Modifier.fillMaxSize()
         ) {
             Row(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ){
                 IconButton(onClick =  {
@@ -73,6 +79,8 @@ fun RecipeDetailScreen(
 
 @Composable
 private fun RecipeDetailContent(recipe: RecipeDto) {
+    val ingredientsText = recipe.extendedIngredients.joinToString(separator = "\n") { ingredient ->
+        ingredient.original}
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -93,5 +101,11 @@ private fun RecipeDetailContent(recipe: RecipeDto) {
                 contentDescription = "${recipe.title} Poster Image"
             )
         }
+
+        Text(
+            modifier = Modifier.padding(16.dp),
+            //text = HtmlCompat.fromHtml(recipe.summary, HtmlCompat.FROM_HTML_MODE_COMPACT).toString(),
+            text = ingredientsText,
+            fontSize = 16.sp)
     }
 }
