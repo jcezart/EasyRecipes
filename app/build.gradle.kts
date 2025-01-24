@@ -27,7 +27,7 @@ android {
         buildConfigField(
             type = "String",
             name = "API_KEY",
-            value = "\"0f7651b3c5a94dfba1770c94abcfd268\""
+            value = "\"SUA API AQUI DENTRO\""
         )
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
