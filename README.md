@@ -8,7 +8,7 @@ Funcionalidades
 
 ## :camera_flash: Screenshots
 <!-- You can add more screenshots here if you like -->
-<img src="https://github.com/jcezart/EasyRecipes/blob/master/easyrecipes1.png" width=200/> <img src="https://github.com/jcezart/EasyRecipes/blob/master/easyrecipes2.png" width=200/> 
+<img src="https://github.com/jcezart/EasyRecipes/blob/master/easyrecipes1.png" width=220/> <img src="https://github.com/jcezart/EasyRecipes/blob/master/easyrecipes2.png" width=220/> 
 
 ## Tecnologias
 - 100% Kotlin
